@@ -14,7 +14,7 @@ typedef struct stack {
 
 void push(STACK* head, int X);
 int pop(STACK* head);
-int is_empty(STACK* head);
+int peek(STACK* head);
 
 int main(void) {
     int n, i;
@@ -32,16 +32,39 @@ int main(void) {
     }
     char* result = (char *)malloc(sizeof(char) * 2 * n);
 
-    while(sequence[j] >= k) {
-        push(head, k);
-        strcat(result, "+\n");
-        k++;
+    for(i = 0; i < n; i++) {
+        if(k <= n) {
+            if(sequence[i] > k) {
+                while(sequence[i] > k) {
+                    push(head, k);
+                    strcat(result, "+\n");
+                    k++;
+                }
+            }
+            else if(sequence[i] < k) {
+                pop(head);
+                strcat(result, "-\n");
+            }
+
+            if(sequence[i] == k) {
+                strcat(result, "+\n-\n");
+                k++;
+            }
+        }
+        else {
+            if(sequence[i] == peek(head)) {
+                pop(head);
+                strcat(result, "-\n");
+            }
+            else {
+                result = "NO";
+                break;
+            }
+        }
     }
+
     printf("%s", result);
-    
-    free(result);
-    free(head);
-    free(sequence);
+
     return 0;
 }
 
@@ -69,11 +92,9 @@ int pop(STACK* head) {
     return temp_data;
 }
 
-int is_empty(STACK* head) {
-    if (head->count == 0) {
-        return 1;
+int peek(STACK* head) {
+    if(head->count == 0) {
+        return -1;
     }
-    else {
-        return 0;
-    }
+    return head->ptr->data;
 }
