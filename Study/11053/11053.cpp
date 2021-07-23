@@ -23,7 +23,8 @@ int DP(int num) {
         memo[i] = 1;
         for(int j = 1; j < i; j++) {
             if(A[i] > A[j]) {
-                memo[i] = (memo[i] > memo[j] ? memo[i] : memo[i] + 1);
+                // memo[i] = (memo[i] > memo[j] ? memo[i] : memo[i] + 1);
+                memo[i] = (memo[i] > memo[j] ? memo[i] : memo[j] + 1);
             }
         }
         length = (length > memo[i] ? length : memo[i]);
