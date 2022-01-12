@@ -29,12 +29,19 @@ int main(void) {
 
 void counting(int i, int j) {
     int count = 0;
+    // for(int a = 1; a <= 4; a++) {
+    //     for(int b = 1; b <= 4; b++) {
+    //         if(building[i * 5 + a][j * 5 + b] == '*') {
+    //             count++;
+    //         }
+    //     }
+    // }
+    // window[count / 4]++;
     for(int a = 1; a <= 4; a++) {
-        for(int b = 1; b <= 4; b++) {
-            if(building[i * 5 + a][j * 5 + b] == '*') {
-                count++;
-            }
+        if(building[i * 5 + a][j * 5 + 1] == '*') {
+            // 첫줄의 첫번째 문자만 검사해줘도 됨
+            count++;
         }
     }
-    window[count / 4]++;
+    window[count]++;
 }
