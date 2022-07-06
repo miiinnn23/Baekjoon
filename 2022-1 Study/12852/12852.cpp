@@ -22,15 +22,11 @@ int main(void) {
 void DP(int num) {
     int result[MAX];
 
-    result[1] = 0;
-    result[2] = 1;
-    result[3] = 1;
-
     graph[1] = 1;
     graph[2] = 1;
     graph[3] = 1;
 
-    for(int i = 4; i <= num; i++) {
+    for(int i = 2; i <= num; i++) {
         graph[i] = i - 1;
         result[i] = result[i - 1] + 1;
 
