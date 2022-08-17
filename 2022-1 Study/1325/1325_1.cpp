@@ -1,16 +1,18 @@
 #include <cstdio>
 #include <vector>
+#include <cstring>
 #define MAX 10001
 
 using namespace std;
 
 int N, M;
-int maximum, temp;
+int maximum, cnt;
 
 vector<int> computer[MAX];
 int counter[MAX];
+bool visited[MAX];
 
-void DFS(int num, int start, int count);
+void DFS(int num, int start);
 
 int main(void) {
     scanf("%d %d", &N, &M);
@@ -23,29 +25,32 @@ int main(void) {
     }
 
     for(int i = 1; i <= N; i++) {
-        temp = 0;
-
-        DFS(i, i, 1);
-        counter[i] = temp;
-        maximum = (temp > maximum ? temp : maximum);
+        memset(visited, false, N + 1);
+        cnt = 0;
+        DFS(i, i);
+        maximum = (counter[i] > maximum ? counter[i] : maximum);
     }
 
     for(int i = 1; i <= N; i++) {
         if(counter[i] == maximum)
             printf("%d ", i);
     }
-    
     printf("\n");
     return 0;
 }
 
-void DFS(int num, int start, int count) {
-    if(count != 1 && start == num) return;
+void DFS(int num, int start) {
+    visited[num] = true;
+    int len = computer[num].size();
 
-    temp = (count > temp ? count : temp);
-
-    for(int i = 0; i < computer[num].size(); i++) {
+    for(int i = 0; i < len; i++) {
         int next = computer[num][i];
-        DFS(next, start, count + 1);
+
+        if(!visited[next]) {
+            cnt++;
+            DFS(next, start);
+        }
     }
+
+    counter[start] = (counter[start] > cnt ? counter[start] : cnt);
 }
