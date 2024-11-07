@@ -1,0 +1,37 @@
+from queue import Queue
+
+def solution(maps):
+    N = len(maps)
+    M = len(maps[0])
+    
+    # visited = list(list(0 for _ in range(M)) for _ in range(N))
+    visited = [[0 for _ in range(M)] for _ in range(N)]
+
+    dx = [1, -1, 0, 0]
+    dy = [0, 0, -1, 1]
+
+    queue = Queue()
+    queue.put([0, 0])
+    visited[0][0] = 1
+
+    while not queue.empty():
+        y, x = queue.get()
+
+        for i in range(len(dx)):
+            ny = y + dy[i]
+            nx = x + dx[i]
+            if(ny < 0 or ny >= N or nx < 0 or nx >= M): continue
+            else:
+                if(visited[ny][nx] == 0 and maps[ny][nx] == 1):
+                    visited[ny][nx] = visited[y][x] + 1
+                    queue.put([ny, nx])
+
+
+    if(visited[N - 1][M - 1] == 0): return -1
+
+    return visited[N - 1][M - 1]
+
+
+N, M = map(int, input().split())
+maps = [[map(int, input().split())] for _ in range(N)]
+print(solution(maps))

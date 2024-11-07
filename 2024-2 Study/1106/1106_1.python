@@ -1,0 +1,13 @@
+N, M = map(int, input().split())
+
+bench = list(map(int, input().split()))
+
+sumation = sum(bench)
+maximum = max(bench)
+
+K_max = maximum + M
+K_min = (M + sumation) // N if (M + sumation) % N == 0 else ((M + sumation) // N) + 1
+
+K_min = max(maximum, K_min)
+
+print(K_min, K_max)
