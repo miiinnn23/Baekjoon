@@ -1,0 +1,19 @@
+T = int(input())
+
+for _ in range(T):
+    N, K = map(int, input().split())
+
+    board = [list(map(int, input().split())) for _ in range(N)]
+
+    border = N - K
+    answer = N * N
+    for y in range(border + 1):
+        for x in range(border + 1):
+            count = 0
+            for i in range(K):
+                for j in range(K):
+                    count += board[i + y][j + x]
+            
+            answer = min(answer, count)
+
+    print(answer)
