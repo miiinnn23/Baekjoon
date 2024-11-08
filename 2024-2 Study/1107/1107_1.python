@@ -1,0 +1,22 @@
+def solution(n, computers):
+    answer = 0
+    visited = [False for _ in range(n)]
+
+    for i in range(n):
+        if(not visited[i]):
+            DFS(i, computers, visited)
+            answer += 1
+
+    return answer
+
+def DFS(node, computers, visited):
+    visited[node] = True
+    for i in range(len(computers[node])):
+        if(computers[node][i] and not visited[i]):
+            DFS(i, computers, visited)
+
+
+n = int(input())
+computers = [list(map(int, input().split())) for _ in range(n)]
+
+print(solution(n, computers))
