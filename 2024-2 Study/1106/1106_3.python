@@ -33,5 +33,5 @@ def solution(maps):
 
 
 N, M = map(int, input().split())
-maps = [[map(int, input().split())] for _ in range(N)]
+maps = [list(map(int, input().split())) for _ in range(N)]
 print(solution(maps))
