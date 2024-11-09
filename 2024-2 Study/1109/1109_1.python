@@ -1,0 +1,25 @@
+def is_placed(queen, visited):
+    for i in range(queen):  # 0부터 현재 queen 위로만 탐색 진행
+        if visited[i] == visited[queen] or queen - i == abs(visited[queen] - visited[i]):
+            return False
+    return True
+
+def DFS(queen, visited, N):
+    if queen == N:
+        return 1
+
+    count = 0
+    for i in range(N):
+        visited[queen] = i
+        if is_placed(queen, visited):
+            count += DFS(queen + 1, visited, N)
+    
+    return count
+
+def solution(n):
+    visited = [0] * n
+    return DFS(0, visited, n)
+
+# 실행 예시
+n = int(input())
+print(solution(n))
