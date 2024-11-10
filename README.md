@@ -9,7 +9,7 @@
 - <b>Data Structure</b> : 2021-1학기 자료구조 공부 <sub>(2021.02.25 ~ 2021.03.18)</sub>
 - <b>Study</b> : 2021-1 여름방학 알고리즘 스터디 <sub>(2021.06.29 ~ 2021.08.18)</sub>
 
-사용 언어 : C++, C, JAVA <br>
+사용 언어 : C++, C, JAVA, Python <br>
 사이트 : <a href="https://www.acmicpc.net/user/ansnnd123">BOJ</a> <br>
 해설 : <a href="https://miiinnn23.tistory.com/category/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%20%EC%A4%80%EB%B9%84">BLOG</a> <br>
 <!-- <img src="https://img.shields.io/badge/now!-72AFFF?style=flat-square&logoColor=white"/> -->
