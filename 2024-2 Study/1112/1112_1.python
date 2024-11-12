@@ -1,0 +1,38 @@
+def solution(n, stations, w):
+    answer = 0
+    
+    start = 0
+
+    # index = 0
+    # for i in range(n):
+    #     if index == len(stations):
+    #         length = n - start
+    #         answer += (length + 2 * w) // (1 + 2 * w)
+    #         break
+
+    #     if i == (stations[index] - 1 - w):
+    #         length = i - start
+    #         answer += (length + 2 * w) // (1 + 2 * w)
+        
+    #     elif i == (stations[index] - 1 + w):
+    #         start = i + 1
+    #         index += 1
+
+    for s in stations:
+        length = s - w - 1 - start
+        if length > 0:
+            answer += (length + 2 * w) // (1 + 2 * w)
+        
+        start = s + w
+    
+    if (stations[-1] + w - 1 < n):
+        length = n - start
+        answer += (length + 2 * w) // (1 + 2 * w)
+
+    return answer
+
+N = int(input())
+stations = list(map(int, input().split()))
+W = int(input())
+
+print(solution(N, stations, W))
