@@ -1,0 +1,43 @@
+from collections import deque
+
+n, m = map(int, input().split())
+board = [list(map(int, input().split())) for _ in range(n)]
+
+visited = [[0] * m for _ in range(n)]
+distance = [[0] * m for _ in range(n)]
+
+target = [0, 0]
+for i in range(len(board)):
+    if 2 in board[i]:
+        target = [i, board[i].index(2)]
+        break
+
+dx = [ 1, -1, 0, 0 ]
+dy = [ 0, 0, 1, -1 ]
+
+queue = deque()
+queue.append(target)
+visited[target[0]][target[1]] = 1
+
+while queue:
+    r, c = queue.popleft()
+    dist = distance[r][c]
+
+    for i in range(4):
+        nr = r + dy[i]
+        nc = c + dx[i]
+        if nr >= n or nr < 0 or nc >= m or nc < 0: continue
+        if board[nr][nc] == 0: continue
+
+        if visited[nr][nc] == 0:
+            visited[nr][nc] = 1
+            distance[nr][nc] = (dist + 1)
+            queue.append([nr, nc])
+
+for i in range(n):
+    for j in range(m):
+        if distance[i][j] == 0 and board[i][j] == 1:
+            print(-1, end = ' ')
+        else:
+            print(distance[i][j], end = ' ')
+    print()
