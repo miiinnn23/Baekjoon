@@ -1,0 +1,54 @@
+def incline(line1, line2):
+    inc = (line1[0] * line2[1] - line1[1] * line2[0])
+    return inc
+
+def cross(line1, line2):
+    x = (line1[1] * line2[2] - line1[2] * line2[1])
+    y = (line1[2] * line2[0] - line1[0] * line2[2])
+    inc = incline(line1, line2)
+
+    return [x / inc, y / inc]
+
+def solution(line):
+    coord = []
+
+    for i in range(len(line)):
+        for j in range(i + 1, len(line)):
+            if incline(line[i], line[j]) == 0:
+                continue
+            else:
+                x, y = cross(line[i], line[j])
+                
+                if(x == int(x) and y == int(y)):
+                    coord.append([x, y])
+    
+    print(coord)
+    x_list = [i[0] for i in coord]
+    y_list = [i[1] for i in coord]
+
+    x_min = int(min(x_list))
+    x_max = int(max(x_list))
+    y_min = int(min(y_list))
+    y_max = int(max(y_list))
+
+    temp = [['.'] * (x_max - x_min + 1) for _ in range(y_max - y_min + 1)]
+
+    for i in coord:
+        temp[y_max - int(i[1])][int(i[0]) - x_min] = '*'
+
+    answer = ['' for _ in range(y_max - y_min + 1)]
+    for i in range(len(temp)):
+        answer[i] = ''.join(temp[i])
+        
+    # for i in range(len(answer)):
+    #     for j in range(len(answer[i])):
+    #         if [x_min + j, y_max - i] in coord:
+    #             temp = list(answer[i])
+    #             temp[j] = '*'
+    #             answer[i] = ''.join(temp)
+
+    return answer
+
+# line = [[2, -1, 4], [-2, -1, 4], [0, -1, 1], [5, -8, -12], [5, 8, 12]]
+line = [[1, -1, 0], [2, -1, 0], [4, -1, 0]]
+print(solution(line))
